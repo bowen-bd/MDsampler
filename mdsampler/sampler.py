@@ -45,7 +45,6 @@ class Sampler(nn.Module):
             self.features = crystal_features
         else:
             self.features = torch.cat((self.features, crystal_features), dim=0)
-        return None
 
     def add_structures(
         self,
