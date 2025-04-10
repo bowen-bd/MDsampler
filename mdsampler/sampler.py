@@ -75,6 +75,17 @@ class Sampler(nn.Module):
         else:
             self.features = torch.cat((self.features, crystal_features), dim=0)
 
+    def add_structures_and_features(
+        self,
+        structures: list[Structure] | Structure,
+        crystal_features: list,
+    ):
+        self.add_crystal_feas(crystal_features)
+        if isinstance(structures, Structure):
+            self.structures.append(structures)
+        else:
+            self.structures += structures
+
     def add_data_points(
         self,
         structures: list[Structure] | Structure,
@@ -235,6 +246,7 @@ class Sampler(nn.Module):
         )
 
         return dataset
+
 
     def get_wcss_list(
         self,
